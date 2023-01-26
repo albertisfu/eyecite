@@ -29,6 +29,7 @@ jobs:
       - name: Add or Update comment on PR that Test is running
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ secrets.FREELAWBOT_TOKEN }}
           recreate: true
           message: |
             Eyecite Benchmarking in progress...
@@ -43,7 +44,7 @@ jobs:
       # That we should drop once groups is released for main
       #----------------------------------------------
       - name: Install Poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@v1.3.3
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
@@ -128,7 +129,7 @@ jobs:
           user_email: 'info@free.law'
           user_name: 'freelawbot'
           source_file: 'results/'
-          destination_repo: 'freelawproject/eyecite'
+          destination_repo: 'albertisfu/eyecite'
           destination_folder: '${{ github.event.number }}'
           destination_branch: 'artifacts'
           commit_message: 'feat(ci): Add artifacts for PR# ${{ github.event.number }}'
@@ -136,6 +137,7 @@ jobs:
       - name: Add or Update PR Comment from Generated Report
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          GITHUB_TOKEN: ${{ secrets.FREELAWBOT_TOKEN }}
           recreate: true
           path: results/report.md
 
@@ -171,7 +173,7 @@ jobs:
       #  -----  install & configure poetry  -----
       #----------------------------------------------
       - name: Install Poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@v1.3.3
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
